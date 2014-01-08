@@ -1,3 +1,4 @@
+
 var makeStack = function(){
     var instance = {};
     var size = 0;
