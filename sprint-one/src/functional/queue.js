@@ -1,3 +1,4 @@
+
 var makeQueue = function(){
   var instance = {};
   var read = 0;
