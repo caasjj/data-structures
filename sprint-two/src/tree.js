@@ -20,30 +20,20 @@ treeMethods.addChild = function(value){
 treeMethods.contains = function(target){
 
   var temp = this;
+  result = false;
 
-  while( this.value !== target) {
-    if( this.children ) {
-      for(var i=0; i < this.children.length; i++) {
-        if (this.children[i] === target) {
-          return true;
-        } else {
-          this.children[i].contains(target);
+  if (this.value === target ) {
+    return true;
+  } else {
+    if (this.children) {
+        for(var i=0; i< this.children.length; i++) {
+          result = result || this.children[i].contains(target);
         }
-      }
     } else {
       return false;
     }
-
   }
- 
-  for (var i=0; i<this.children.length; i++) {
-    if (( this.children[i].value) === target )  {
-      return true;
-    } else {
-      this.children[i].contains( target );
-    }
-  }
-  return false;
+  return result;
 };
 
 var extend = function(targ, obj) {
