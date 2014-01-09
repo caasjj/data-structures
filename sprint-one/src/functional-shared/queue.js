@@ -21,13 +21,12 @@ var enqueue = function(value){
 };
 
 var dequeue = function(){
-if(this._head < this._tail){  
-  var result = this._storage[this._head];
-  delete this._storage[this._head];
-  this._head++;
-  return result;
-}
-
+	if(this._head < this._tail){  
+	  var result = this._storage[this._head];
+	  delete this._storage[this._head];
+	  this._head++;
+	  return result;
+	}
 };
 
 var size = function(){

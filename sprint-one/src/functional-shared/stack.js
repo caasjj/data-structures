@@ -1,14 +1,13 @@
 var makeStack = function() {
-  	var instance = {};
+	var instance = {};
 
-  	extend(instance, stackMethods);
+	extend(instance, stackMethods);
     // Use an object with numeric keys to store values
-    debugger;
 
 	instance._storage = {};
-   	instance._size = 0;
+ 	instance._size = 0;
 
-    return instance;
+  return instance;
 };
  
 
