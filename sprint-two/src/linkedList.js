@@ -26,17 +26,6 @@ var makeLinkedList = function(){
         temp = temp.next;
     }
     return true;
-    // if (temp.value === target) {
-    //   return true;
-    // } 
-
-    // while( temp.next !== null )  {
-    //   temp = temp.next;
-    //   if (temp.value === target) {
-    //     return true;
-    //   }
-    // }
-    // return false;
   };
 
   return list;
