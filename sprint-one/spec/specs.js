@@ -128,7 +128,6 @@ define([
       });
 
       it('reports a size of 0 after removing more items than were added', function() {
-        debugger;
         queue.enqueue('a');
         queue.dequeue();
         queue.dequeue();
