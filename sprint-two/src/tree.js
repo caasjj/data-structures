@@ -32,6 +32,10 @@ treeMethods.contains = function(target){
   return false;
 };
 
+treeMethods.removeFromParent = function() {
+  return this;
+};
+
 var extend = function(targ, obj) {
   for(var p in obj) {
     if (!targ.hasOwnProperty(p)) {

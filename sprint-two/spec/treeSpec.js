@@ -53,4 +53,21 @@ describe("tree", function() {
     }
   });
 
+  it("should dissociate removed children", function(){
+    tree.addChild(0);
+    tree.addChild(1);
+    tree.addChild(2);
+    tree.children[1].addChild('a');
+    tree.children[1].addChild('b');
+    tree.children[1].children[0].addChild('c');
+
+    tree.children[1].removeFromParent();
+    assert.isFalse(tree.contains(1));
+    assert.isFalse(tree.contains('a'));
+    assert.isFalse(tree.contains('b'));
+    assert.isFalse(tree.contains('c'));
+
+  });
+
+
 });
