@@ -44,4 +44,13 @@ describe("tree", function() {
     assert.isTrue(tree.contains(8));
   });
 
+  it("should be parent of all its children", function(){
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.addChild(8);
+    for(var i=0; i < tree.children.length; i++) {
+      assert.equal(tree.children[i].parent, tree);
+    }
+  });
+
 });

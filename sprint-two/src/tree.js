@@ -1,7 +1,8 @@
-var makeTree = function(value){
+var makeTree = function(value, parent){
   var newTree = {};
   newTree.value = value;
   newTree.children = undefined;
+  newTree.parent = parent || null;
   extend(newTree, treeMethods);
   return newTree;
 };
@@ -11,9 +12,9 @@ var treeMethods = {};
 
 treeMethods.addChild = function(value){
   if (!this.children) {
-    this.children = [makeTree(value)];
+    this.children = [makeTree(value, this)];
   } else {
-    this.children.push( makeTree(value) );
+    this.children.push( makeTree(value, this) );
   }
 };
 
