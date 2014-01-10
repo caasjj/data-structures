@@ -51,5 +51,34 @@ describe("linkedList", function() {
     assert.isFalse(linkedList.contains(4));
   });
 
+  it("shoudld add item to head", function(){
+    linkedList.addToHead(4);
+    assert.isTrue(linkedList.contains(4));
+  });
+
+  it("should not break linked list links when adding to head", function(){
+    linkedList.addToTail(4);
+    linkedList.addToTail(5);
+    linkedList.addToHead(14);
+    assert.isTrue(linkedList.contains(14));
+    assert.isTrue(linkedList.contains(4));
+    assert.isTrue(linkedList.contains(5));
+  });
+
+ it("should remove tail from list of more than one node", function(){
+    linkedList.addToTail(4);
+    linkedList.addToTail(5);
+    linkedList.removeTail();
+    assert.isFalse(linkedList.contains(5));
+    assert.isTrue(linkedList.contains(4));
+  });
+
+  it("should empty list of one node", function(){
+    linkedList.addToTail(4);
+    linkedList.removeTail();
+    assert.isFalse(linkedList.contains(4));
+    assert.equal(linkedList.head, null);
+  });
+
   // add more tests here to test the functionality of linkedList
 });
