@@ -33,7 +33,10 @@ treeMethods.contains = function(target){
 };
 
 treeMethods.removeFromParent = function() {
-  return this;
+   if ( this.parent ) {
+      var myIndex = this.parent.children.indexOf(this);
+      this.parent.children.splice(myIndex, 1);
+   }
 };
 
 var extend = function(targ, obj) {
