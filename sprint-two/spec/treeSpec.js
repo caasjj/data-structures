@@ -11,6 +11,8 @@ describe("tree", function() {
   it("should have methods named 'addChild' and 'contains', and a property named 'value'", function() {
     expect(tree.addChild).to.be.a('function');
     expect(tree.contains).to.be.a('function');
+    expect(tree.removeFromParent).to.be.a('function');
+    expect(tree.traverse).to.be.a('function');
     assert.isTrue('value' in tree);
   });
 
@@ -66,8 +68,21 @@ describe("tree", function() {
     assert.isFalse(tree.contains('a'));
     assert.isFalse(tree.contains('b'));
     assert.isFalse(tree.contains('c'));
-
   });
 
+it("should traverse tree and execute a callback on every element", function(){
+    var array = [];
+    var func = function(value){ array.push(value); };
+    tree = makeTree(1);
+    tree.addChild(2);
+    tree.addChild(3);
+    tree.children[1].addChild(4);
+    tree.children[1].children[0].addChild(9);
+    tree.children[1].addChild(5);
+    tree.children[0].addChild(6);
+    tree.traverse(func);
+    assert.deepEqual(array, [1, 2, 6, 3, 4, 9, 5]);
+    assert.notStrictEqual(array, [1, 2, 6, 3, 4, 9, 5]);
+  });
 
 });
