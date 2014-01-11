@@ -20,6 +20,13 @@ describe("hashTable", function() {
     expect(hashTable.retrieve("Steven")).to.equal("Seagal");
   });
 
+  it("should overwrite duplicate keys", function() {
+    hashTable.insert("Steven", "Hawking");
+    hashTable.insert("Steven", "Seagal");
+    expect(hashTable.retrieve("Steven")).to.equal("Seagal");
+    expect(hashTable._size).to.equal(1);
+  });
+
   it("should not contain values that were not inserted", function() {
     hashTable.insert("Steven", "Spielberg");
     expect(hashTable.retrieve("Steven")).not.to.equal("Seagal");
@@ -39,7 +46,7 @@ describe("hashTable", function() {
     expect(hashTable.retrieve(v1)).to.equal(v1);
     expect(hashTable.retrieve(v2)).to.equal(v2);
   });
-  
+
   // (Extra credit! Remove the extra 'x' when you want the following tests to run)
   it("should double in size when needed", function() {
     for (var i = 0; i < people.length; i++){

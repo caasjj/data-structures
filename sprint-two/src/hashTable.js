@@ -6,44 +6,62 @@ var HashTable = function(){
 };
 
 HashTable.prototype.rehash = function(size) {
-  var temp = this._storage;
+  temp = this._storage;
+
   this._limit = size;
   this._storage = makeLimitedArray(this._limit);
+  this._size = 0;
+  var that = this;
   temp.each( function(bin) {
-    bin.each( function(value, idx) {
-      this._storage.insert( value.key, value);
-    });
+    if (bin && bin.length) {
+      bin.forEach( function(value) {
+        that.insert( value[0], value[1]);
+      });
+    }
   });
+  console.log('Reshash done');
 };
 
 HashTable.prototype.insert = function(k, v){
-  var i = getIndexBelowMaxForKey(k, this._limit);
-  if( !this._storage[i]) {
-    this._storage[i] = [];
-    this._storage[i].key = [];
-    this._storage[i] = v;
-    this._storage[i].key = k;
-  } else {
-    this._storage[i].push(v);
-    this._storage[i].key.push(k);
+  if (this.retrieve(k)) {
+    this.remove(k);
   }
+  var i = getIndexBelowMaxForKey(k, this._limit);
+  this._storage.set(i, [k, v]);
   if (++this._size >= Math.floor(this._limit * 0.75 ) ) {
     this.rehash(this._limit * 2);
+    console.log('Rehashed Up!');
   }
 };
 
 HashTable.prototype.retrieve = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  var idx = this._storage[i].key.indexOf(k);
-  return this._storage[idx] || null;
+  var bin = this._storage.get(i);
+  var result = null;
+  if (bin && bin.length) {
+    bin.forEach(function(val){
+      if (val[0] === k) {
+        result = val[1];
+      }
+    });
+  }
+  return result;
 };
 
 HashTable.prototype.remove = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  var idx = this._storage[i].key.indexOf(k);
-  delete this._storage[idx];
-  if (--this._size < Math.floor(this._limit * 0.25) ) {
-    this.rehash( this._limit / 2);
+  bin = this._storage.get(i);
+  if (bin && bin.length) {
+    var that = this;
+    bin.forEach(function(val, idx) {
+      if( val[0] === k) {
+        bin.splice(idx, 1);
+        --that._size;
+      }
+    });
+    if (this._size < Math.floor(this._limit * 0.25)) {
+      this.rehash(this._limit/2);
+    }
   }
 };
 
