@@ -8,13 +8,13 @@ var setPrototype = {};
 
 setPrototype.add = function(item){
   this._storage = this._storage || {};
-  this._storage[ ''+item ] = item;
+  this._storage[ JSON.stringify(item) ] = item;
 };
 
 setPrototype.contains = function(item){
-  return this._storage && this._storage.hasOwnProperty( '' + item );
+  return this._storage && this._storage.hasOwnProperty( JSON.stringify(item) );
 };
 
 setPrototype.remove = function(item){
-  delete this._storage[ '' + item ];
+  delete this._storage[ JSON.stringify(item) ];
 };
