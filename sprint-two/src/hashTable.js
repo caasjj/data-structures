@@ -23,12 +23,29 @@ HashTable.prototype.rehash = function(size) {
 };
 
 HashTable.prototype.insert = function(k, v){
-  if (this.retrieve(k)) {
-    this.remove(k);
-  }
+
   var i = getIndexBelowMaxForKey(k, this._limit);
-  this._storage.set(i, [k, v]);
-  if (++this._size >= Math.floor(this._limit * 0.75 ) ) {
+  var hashBucket = this._storage.get(i) || [];
+  var that = this;
+  if (hashBucket && hashBucket.length > 0) {
+    // tried functional instead fo for loop ... ran into problem 
+    // returning early from 'insert' when a key is repeated and we 
+    // have to copy instead of add. So, logic looks/is sucky.
+    hashBucket.forEach( function(value, idx, arr) {
+      if ( value[0] === k) {
+        arr[idx]=[k,v];
+        console.log('repeat key on index ', idx, ':', k);
+      } else {
+        arr.push([k,v]);
+        that._size++;
+      }
+    });
+  } else {
+    hashBucket.push([k,v]);
+    this._size++;
+  }
+  this._storage.set(i, hashBucket);
+  if (this._size >= Math.floor(this._limit * 0.75 ) ) {
     this.rehash(this._limit * 2);
     console.log('Rehashed Up!');
   }
