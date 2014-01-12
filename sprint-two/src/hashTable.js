@@ -28,8 +28,8 @@ HashTable.prototype.insert = function(k, v){
   var hashBucket = this._storage.get(i) || [];
   var that = this;
   if (hashBucket && hashBucket.length > 0) {
-    // tried functional instead fo for loop ... ran into problem 
-    // returning early from 'insert' when a key is repeated and we 
+    // tried functional instead fo for loop ... ran into problem
+    // returning early from 'insert' when a key is repeated and we
     // have to copy instead of add. So, logic looks/is sucky.
     hashBucket.forEach( function(value, idx, arr) {
       if ( value[0] === k) {
