@@ -24,4 +24,5 @@ var queueMethods = {
   size: function(){
     return this.write - this.read;
   }
+
 };

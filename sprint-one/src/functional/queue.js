@@ -8,7 +8,6 @@ var makeQueue = function(){
   var storage = {};
 
   // Implement the methods below
-
   instance.enqueue = function(value){
     storage[write] = value;
     write++
@@ -30,3 +29,5 @@ var makeQueue = function(){
 
   return instance;
 };
+
+// c b a

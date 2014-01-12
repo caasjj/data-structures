@@ -27,4 +27,15 @@ describe("set", function() {
     assert.isFalse(set.contains('Mel Gibson'));
   });
 
+  it("should be able to handle numbers", function(){
+    set.add(5);
+    assert.isTrue(set.contains(5));
+  });
+
+  it("should be able to handle arbitrary objects", function(){
+    var obj = { prop: 'AnObj' };
+    set.add( obj );
+    assert.isTrue(set.contains( obj ));
+  });
+
 });
