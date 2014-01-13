@@ -43,4 +43,40 @@ describe("binarySearchTree", function() {
     assert.deepEqual(array, [5,2,3]);
     assert.notStrictEqual(array, [5,2,3]);
   });
+
+  it("should not alter a tree of 1 element", function() {
+    binarySearchTree.reBalance();
+    var array = [];
+    var func = function(value){ array.push(value); };
+    binarySearchTree.depthFirstLog(func);
+    assert.deepEqual(array, [5]);
+    assert.notStrictEqual(array, [5]);
+  });
+
+  it("should balance an imbalanced tree of 3 elements", function() {
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(7);
+    binarySearchTree.reBalance();
+    var array = [];
+    var func = function(value){ array.push(value); };
+    binarySearchTree.depthFirstLog(func);
+    assert.deepEqual(array, [6, 7, 5]);
+    assert.notStrictEqual(array, [6, 7, 5]);
+  });
+
+  it("should balance an imbalanced tree of 7 elements", function() {
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(8);
+    binarySearchTree.insert(9);
+    binarySearchTree.insert(10);
+    binarySearchTree.insert(11);
+    binarySearchTree.reBalance();
+    var array = [];
+    var func = function(value){ array.push(value); };
+    binarySearchTree.depthFirstLog(func);
+    assert.deepEqual(array, [8, 10, 11, 9, 6, 7, 5]);
+    assert.notStrictEqual(array, [8, 10, 11, 9, 6, 7, 5]);
+  });
+
 });

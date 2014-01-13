@@ -21,7 +21,6 @@ binTreeMethods.insert = function(value) {
     }
     return;
   }
-
   if (this.left) {
     this.left.insert(value);
   } else {
@@ -69,9 +68,9 @@ binTreeMethods.sort = function() {
 
 binTreeMethods.reBalance = function() {
 
-  var reBalance = function(array) {
+  var reIndex = function(array) {
     var result = [];
-    var reIndex = function(subArray) { 
+    var recurse = function(subArray) { 
       var L = subArray.length;
       var N = Math.floor(L/2);
       if (L < 2) {
@@ -81,17 +80,20 @@ binTreeMethods.reBalance = function() {
         return
       }
       result.push( subArray[N] );
-      reIndex( subArray.slice(0,N) );
-      reIndex( subArray.slice(N+1) );
+      recurse( subArray.slice(0,N) );
+      recurse( subArray.slice(N+1) );
     };
-  reIndex(array);
+  recurse(array);
   return result;
   }
 
   var sortedArray = this.sort();
-  var reIndexedArray = reBalance( sortedArray );
-  var newTree = makeBinarySearchTree( reIndexArray.pop() );
-  reIndexArray.each( function(value) {
+  var reIndexedArray = reIndex( sortedArray );
+  var newTree = this;
+  this.value = reIndexedArray.shift() ;
+  this.left = null;
+  this.right = null;
+  reIndexedArray.forEach( function(value) {
     newTree.insert( value );
   });
 

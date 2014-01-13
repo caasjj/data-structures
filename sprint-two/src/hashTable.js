@@ -19,7 +19,6 @@ HashTable.prototype.rehash = function(size) {
       });
     }
   });
-  console.log('Reshash done');
 };
 
 HashTable.prototype.insert = function(k, v){
@@ -34,7 +33,6 @@ HashTable.prototype.insert = function(k, v){
     hashBucket.forEach( function(value, idx, arr) {
       if ( value[0] === k) {
         arr[idx]=[k,v];
-        console.log('repeat key on index ', idx, ':', k);
       } else {
         arr.push([k,v]);
         that._size++;
@@ -47,7 +45,6 @@ HashTable.prototype.insert = function(k, v){
   this._storage.set(i, hashBucket);
   if (this._size >= Math.floor(this._limit * 0.75 ) ) {
     this.rehash(this._limit * 2);
-    console.log('Rehashed Up!');
   }
 };
 
