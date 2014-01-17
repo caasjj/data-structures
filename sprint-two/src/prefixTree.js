@@ -8,11 +8,12 @@ var PrefixTree = function(rank) {
 
 PrefixTree.prototype.insert = function(word, rank) {
 
-  var addLetter = function(node,letter, rank) {
-    if (!node.children.hasOwnProperty[letter]) {
+  var addLetter = function addLetter(node, letter, rank) {
+    if (!node.children.hasOwnProperty(letter)) {
       return node.addChild(letter, rank);
     }
     else {
+      node.children[letter].rank = node.children[letter].rank || rank;
       return node.children[letter];
     }
   };
@@ -44,9 +45,13 @@ PrefixTree.prototype.hasChild = function(letter) {
 
 
 var randkedWords = {
+  'a'     : 3,
+  'ab'    : 100,
   'hello' : 1,
-  'the' : 1 ,
-  'there' : 2
+  'there' : 4,
+  'the'   : 5,
+  'good'  : 2,
+  'bad'   : 5
 };
 
 var pt = new PrefixTree();
