@@ -52,21 +52,8 @@ describe("prefix tree", function() {
 
     beforeEach(function() {
       tree = new  PrefixTree(null);
-      randkedWords = {
-        'the'     : 1,
-        'there'   : 2,
-        'them'    : 3,
-        'hello'   : 10,
-        'hacker'  : 100,
-        'that'    : 5,
-        'thermos' : 90,
-        'bat'     : 30,
-        'great'   : 40,
-        'go'      : 8,
-        'i'       : 1
-      };
-      for(var word in randkedWords) {
-        tree.insert(word, randkedWords[word]);
+      for(var word in dictionary) {
+        tree.insert(word, dictionary[word]);
       }
     });
 
