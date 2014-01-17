@@ -65,8 +65,18 @@ describe("prefix tree", function() {
         'go'      : 8,
         'i'       : 1
       };
+      for(var word in randkedWords) {
+        tree.insert(word, randkedWords[word]);
+      }
     });
 
+    it("should return subtrees corresponding to digit pressed", function() {
+      var subtrees = tree.getSubtrees(4);
+      expect(subtrees.length).to.eq(3);
+      expect(subtrees[0]).to.equal( tree.children['g'] );
+      expect(subtrees[1]).to.equal( tree.children['h'] );
+      expect(subtrees[2]).to.equal( tree.children['i'] );
+    });
   });
 
 });

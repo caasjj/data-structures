@@ -1,15 +1,12 @@
-
 var PrefixTree = function(rank) {
-
   this.children = {}
   this.rank = rank;
-
 };
 
 PrefixTree.prototype.insert = function(word, rank) {
 
   var addLetter = function addLetter(node, letter, rank) {
-    if (!node.children.hasOwnProperty(letter)) {
+    if (!node.hasChild(letter)) {
       return node.addChild(letter, rank);
     }
     else {
@@ -30,6 +27,8 @@ PrefixTree.prototype.insert = function(word, rank) {
 
 PrefixTree.prototype.trace = function(word) {
   var rank = null;
+  var node = this;
+  // look for a word in the dictionary
   return rank;
 };
 
@@ -43,18 +42,14 @@ PrefixTree.prototype.hasChild = function(letter) {
   return this.children.hasOwnProperty(letter);
 };
 
-
-var randkedWords = {
-  'a'     : 3,
-  'ab'    : 100,
-  'hello' : 1,
-  'there' : 4,
-  'the'   : 5,
-  'good'  : 2,
-  'bad'   : 5
+PrefixTree.prototype.getSubtrees = function(digit) {
+  var letters = [null, null, 'abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz'];
+  if (!letters[digit]) return;
+  var chars = letters[digit]
+  var nodes = [];
+  for(var idx=0; idx<chars.length; idx++) {
+    if (this.hasChild(chars[idx])) 
+      nodes.push(this.children[chars[idx]]);
+  }
+  return nodes;
 };
-
-var pt = new PrefixTree();
-for(var word in randkedWords) {
-  pt.insert(word, randkedWords[word]);
-}
